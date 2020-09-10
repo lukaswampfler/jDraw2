@@ -35,7 +35,7 @@ public class Triangle extends Polygon implements Figure {
 	private final Rectangle box;
 	
 	/** list of listeners. */
-	private final List<FigureListener> listeners = new CopyOnWriteArrayList<>();
+	//private final List<FigureListener> listeners = new CopyOnWriteArrayList<>();
 
 	/**
 	 * Create a new rectangle of the given dimension.
@@ -91,7 +91,7 @@ public class Triangle extends Polygon implements Figure {
 		return tri.getBounds();
 	}
 
-	@Override
+	/*@Override
 	public void addFigureListener(FigureListener listener) {
 		if (listener != null && !listeners.contains(listener)) {
 			listeners.add(listener);
@@ -106,7 +106,7 @@ public class Triangle extends Polygon implements Figure {
 	@Override
 	public Figure clone() {
 		return null;
-	}
+	}*/
 	
 	protected void propagateFigureEvent() {
 		FigureEvent fe = new FigureEvent(this);
