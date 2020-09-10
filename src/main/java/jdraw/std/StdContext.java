@@ -19,13 +19,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import jdraw.figures.RectTool;
 import jdraw.figures.OvalTool;
 import jdraw.figures.LineTool;
-import jdraw.figures.TriangleTool;
+//import jdraw.figures.TriangleTool;
 import jdraw.framework.DrawCommandHandler;
 import jdraw.framework.DrawModel;
 import jdraw.framework.DrawTool;
 import jdraw.framework.DrawToolFactory;
 import jdraw.framework.DrawView;
 import jdraw.framework.Figure;
+
 
 /**
  * Standard implementation of interface DrawContext.
@@ -174,8 +175,8 @@ public class StdContext extends AbstractContext {
 		addTool(rectangleTool);
 		OvalTool ovalTool = new OvalTool(this);
 		addTool(ovalTool);
-		TriangleTool triTool = new TriangleTool(this);
-		addTool(triTool);
+		//TriangleTool triTool = new TriangleTool(this);
+		//addTool(triTool);
 		
 	}
 

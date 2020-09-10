@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import jdraw.framework.Figure;
+import jdraw.framework.AbstractFigure;
 import jdraw.framework.FigureEvent;
 import jdraw.framework.FigureListener;
 
@@ -22,13 +23,13 @@ import jdraw.framework.FigureListener;
  * @author Christoph Denzler
  *
  */
-public class Rect implements Figure {
+public class Rect extends AbstractFigure {
 
 	/** Use the java.awt.Rectangle in order to save/reuse code. */
 	private final Rectangle rectangle;
 	
 	/** list of listeners. */
-	private final List<FigureListener> listeners = new CopyOnWriteArrayList<>();
+	//private final List<FigureListener> listeners = new CopyOnWriteArrayList<>();
 
 	/**
 	 * Create a new rectangle of the given dimension.
@@ -77,7 +78,7 @@ public class Rect implements Figure {
 		return rectangle.getBounds();
 	}
 
-	@Override
+	/*@Override
 	public void addFigureListener(FigureListener listener) {
 		if (listener != null && !listeners.contains(listener)) {
 			listeners.add(listener);
@@ -92,7 +93,7 @@ public class Rect implements Figure {
 	@Override
 	public Figure clone() {
 		return null;
-	}
+	}*/
 	
 	protected void propagateFigureEvent() {
 		FigureEvent fe = new FigureEvent(this);
