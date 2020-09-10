@@ -24,7 +24,7 @@ import jdraw.framework.AbstractFigure;
 public class Line extends AbstractFigure {
 
 	/** Use the java.awt.geom.Line2D.Double in order to save/reuse code. */
-	private final Double line;
+	private Double line;
 	
 	private int dx, dy;
 
@@ -95,10 +95,7 @@ public class Line extends AbstractFigure {
 		listeners.remove(listener);
 	}
 
-	@Override
-	public Figure clone() {
-		return null;
-	}
+	
 	
 	protected void propagateFigureEvent() {
 		FigureEvent fe = new FigureEvent(this);
@@ -106,6 +103,15 @@ public class Line extends AbstractFigure {
 			listener.figureChanged(fe);
 		}
 	}*/
+	@Override
+	public AbstractFigure clone() {
+		Line l = (Line) super.clone();
+		l.dx = this.dx;
+		l.dy = this.dy;
+		l.line = (Double) this.line.clone();
+		return l;
+	}
+
 
 	@Override
     public List<Figure.Handle> getHandles() {

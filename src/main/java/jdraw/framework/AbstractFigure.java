@@ -9,7 +9,7 @@ import java.awt.Rectangle;
 
 public abstract class AbstractFigure implements Figure {
     
-    public final List<FigureListener> listeners = new CopyOnWriteArrayList<>();
+    public List<FigureListener> listeners = new CopyOnWriteArrayList<>();
 
     public Rectangle rectangle = null;
 
@@ -44,8 +44,17 @@ public abstract class AbstractFigure implements Figure {
 	}
 
 	@Override
-	public Figure clone() {
-		return null;
+	public AbstractFigure clone() {
+        try{
+        AbstractFigure f = (AbstractFigure) super.clone();
+        f.rectangle = (Rectangle) this.rectangle.clone();
+        f.listeners = new CopyOnWriteArrayList<FigureListener> (f.listeners);
+        // sind Listeners wie Strings unveränderlich und müssen deshalb nicht noch extra geklont werden?
+        return f;
+    } catch (CloneNotSupportedException e){
+        throw new InternalError();
+    }
+	
     }
 
     protected void propagateFigureEvent() {

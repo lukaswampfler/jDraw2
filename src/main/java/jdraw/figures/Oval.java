@@ -23,7 +23,7 @@ import jdraw.framework.AbstractFigure;
 public class Oval extends AbstractFigure {
 
 	/** Use the java.awt. in order to save/reuse code. */
-	private final Double oval;
+	private Double oval;
 	
 	/** list of listeners. */
 	//private final List<FigureListener> listeners = new CopyOnWriteArrayList<>();
@@ -88,10 +88,7 @@ public class Oval extends AbstractFigure {
 		listeners.remove(listener);
 	}
 
-	@Override
-	public Figure clone() {
-		return null;
-	}
+	
 	
 	protected void propagateFigureEvent() {
 		FigureEvent fe = new FigureEvent(this);
@@ -100,5 +97,12 @@ public class Oval extends AbstractFigure {
 		}
 	}*/
 
+	@Override
+	public AbstractFigure clone() {
+		// no try-catch necessary: because Exception-handling already in super-call??
+		Oval f = (Oval) super.clone();
+			f.oval = (Double) this.oval.clone();
+			return f;
+	}
 
 }
