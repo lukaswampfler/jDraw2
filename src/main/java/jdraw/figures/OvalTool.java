@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
+import jdraw.framework.AbstractFigure;
 import jdraw.framework.DrawContext;
 import jdraw.framework.DrawTool;
 import jdraw.framework.DrawView;
@@ -46,7 +47,7 @@ public class OvalTool implements DrawTool {
 	 * mouse down - mouse drag - mouse up cycle) this variable refers
 	 * to the new rectangle that is inserted.
 	 */
-	private Oval newOval = null;
+	private AbstractFigure newOval = null;
 
 	/**
 	 * Temporary variable.

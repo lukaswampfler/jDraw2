@@ -9,13 +9,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
-import jdraw.framework.Figure;
 import jdraw.framework.AbstractFigure;
-import jdraw.framework.FigureEvent;
-import jdraw.framework.FigureListener;
 
 /**
  * Represents rectangles in JDraw.
@@ -24,12 +19,6 @@ import jdraw.framework.FigureListener;
  *
  */
 public class Rect extends AbstractFigure {
-
-	/** Use the java.awt.Rectangle in order to save/reuse code. */
-	private final Rectangle rectangle;
-	
-	/** list of listeners. */
-	//private final List<FigureListener> listeners = new CopyOnWriteArrayList<>();
 
 	/**
 	 * Create a new rectangle of the given dimension.
@@ -60,7 +49,7 @@ public class Rect extends AbstractFigure {
 		propagateFigureEvent();
 	}
 
-	@Override
+	/*@Override
 	public void move(int dx, int dy) {
 		if (dx != 0 || dy != 0) { // notification only if there is a change
 			rectangle.setLocation(rectangle.x + dx, rectangle.y + dy);
@@ -78,7 +67,7 @@ public class Rect extends AbstractFigure {
 		return rectangle.getBounds();
 	}
 
-	/*@Override
+	@Override
 	public void addFigureListener(FigureListener listener) {
 		if (listener != null && !listeners.contains(listener)) {
 			listeners.add(listener);
@@ -93,14 +82,14 @@ public class Rect extends AbstractFigure {
 	@Override
 	public Figure clone() {
 		return null;
-	}*/
+	}
 	
 	protected void propagateFigureEvent() {
 		FigureEvent fe = new FigureEvent(this);
 		for (FigureListener listener : listeners) {
 			listener.figureChanged(fe);
 		}
-	}
+	}*/
 
 
 }

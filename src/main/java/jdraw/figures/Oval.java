@@ -10,12 +10,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
-import jdraw.framework.Figure;
-import jdraw.framework.FigureEvent;
-import jdraw.framework.FigureListener;
+import jdraw.framework.AbstractFigure;
+
 
 /**
  * Represents ovals in JDraw.
@@ -23,13 +20,13 @@ import jdraw.framework.FigureListener;
  * @author Christoph Denzler
  *
  */
-public class Oval implements Figure {
+public class Oval extends AbstractFigure {
 
 	/** Use the java.awt. in order to save/reuse code. */
 	private final Double oval;
 	
 	/** list of listeners. */
-	private final List<FigureListener> listeners = new CopyOnWriteArrayList<>();
+	//private final List<FigureListener> listeners = new CopyOnWriteArrayList<>();
 
 	/**
 	 * Create a new oval of the given dimension.
@@ -40,6 +37,7 @@ public class Oval implements Figure {
 	 */
 	public Oval(int x, int y, int w, int h) {
 		oval = new Double(x, y, w, h);
+		this.rectangle = new Rectangle(x, y, w, h);
 	}
 
 	/**
@@ -47,37 +45,35 @@ public class Oval implements Figure {
 	 * @param g the graphics context to use for drawing.
 	 */
 	@Override
-	//TODO
 	public void draw(Graphics g) {
 		g.setColor(Color.GREEN);
-		g.fillOval((int)(oval.x), (int)(oval.y), (int)(oval.width), (int)(oval.height));
+		g.fillOval((int)(rectangle.x), (int)(rectangle.y), (int)(rectangle.width), (int)(rectangle.height));
 		g.setColor(Color.BLUE);
-		g.drawOval((int)(oval.x), (int)(oval.y), (int)(oval.width), (int)(oval.height));
+		g.drawOval((int)(rectangle.x), (int)(rectangle.y), (int)(rectangle.width), (int)(rectangle.height));
 	}
 	
 	@Override
 	public void setBounds(Point origin, Point corner) {
-		oval.setFrameFromDiagonal(origin, corner);
+		rectangle.setFrameFromDiagonal(origin, corner);
 		propagateFigureEvent();
 	}
 
-	@Override
+	/*@Override
 	public void move(int dx, int dy) {
 		if (dx != 0 || dy != 0) { // notification only if there is a change
-			oval.x = oval.x + dx;
-			oval.y = oval.y + dy;
+			rectangle.setLocation(rectangle.x + dx, rectangle.y + dy);
 			propagateFigureEvent();
 		}
 	}
 
 	@Override
 	public boolean contains(int x, int y) {
-		return oval.contains(x, y);
+		return rectangle.contains(x, y);
 	}
 
 	@Override
 	public Rectangle getBounds() {
-		return oval.getBounds();
+		return rectangle.getBounds();
 	}
 
 	@Override
@@ -102,7 +98,7 @@ public class Oval implements Figure {
 		for (FigureListener listener : listeners) {
 			listener.figureChanged(fe);
 		}
-	}
+	}*/
 
 
 }
