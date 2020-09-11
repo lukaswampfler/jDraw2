@@ -5,10 +5,12 @@
 package jdraw.std;
 
 import java.io.File;
+import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
@@ -27,6 +29,7 @@ import jdraw.framework.DrawTool;
 import jdraw.framework.DrawToolFactory;
 import jdraw.framework.DrawView;
 import jdraw.framework.Figure;
+import jdraw.framework.GroupFigure;
 
 
 /**
@@ -149,12 +152,41 @@ public class StdContext extends AbstractContext {
 		
 		editMenu.addSeparator();
 		JMenuItem group = new JMenuItem("Group");
-		group.setEnabled(false);
+		group.setEnabled(true);
 		editMenu.add(group);
+		
+		group.addActionListener(e -> {
+			if(!getView().getSelection().isEmpty()){
+				List <Figure> figures = new ArrayList<>();
+				for (Figure f: getView().getSelection()){
+					figures.add(f);
+					getModel().removeFigure(f);
+				} 
+				GroupFigure gf = new GroupFigure(figures);
+				getView().clearSelection();
+				getView().addToSelection(gf);
+				getModel().addFigure(gf);
+			}
+		});
 
 		JMenuItem ungroup = new JMenuItem("Ungroup");
-		ungroup.setEnabled(false);
+		ungroup.setEnabled(true);
 		editMenu.add(ungroup);
+		ungroup.addActionListener(e -> {
+			List<Figure> figures = getView().getSelection();
+			for (Figure f: figures){
+					if(f instanceof GroupFigure){
+						getModel().removeFigure(f);
+						GroupFigure gf = (GroupFigure) f;
+						getView().removeFromSelection(f);
+						gf.getFigureParts().forEach(a -> {
+							getView().addToSelection(a);
+							getModel().addFigure(a);
+						});
+					}
+				}
+			getView().repaint();
+		});
 
 		editMenu.addSeparator();
 
