@@ -5,6 +5,7 @@
 package jdraw.std;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,6 +38,8 @@ import jdraw.framework.Figure;
  */
 @SuppressWarnings("serial")
 public class StdContext extends AbstractContext {
+
+	public List<Figure> clipBoard = new ArrayList<>();
 	/**
 	 * Constructs a standard context with a default set of drawing tools.
 	 * @param view the view that is displaying the actual drawing.
@@ -97,9 +100,45 @@ public class StdContext extends AbstractContext {
 		);
 
 		editMenu.addSeparator();
-		editMenu.add("Cut").setEnabled(false);
-		editMenu.add("Copy").setEnabled(false);
-		editMenu.add("Paste").setEnabled(false);
+		JMenuItem cut = new JMenuItem("Cut");
+		cut.setAccelerator(KeyStroke.getKeyStroke("control X"));
+		editMenu.add(cut);
+		cut.addActionListener(e -> {
+			clipBoard.clear();
+			for (Figure f: getView().getSelection()){
+				clipBoard.add(f.clone());
+				System.out.println(clipBoard.size());
+				getModel().removeFigure(f);
+				//getView().removeFromSelection(f); nicht nötig.
+				getView().repaint();
+			}
+			
+		});
+
+		JMenuItem copy = new JMenuItem("Copy");
+		copy.setAccelerator(KeyStroke.getKeyStroke("control C"));
+		editMenu.add(copy);
+		copy.addActionListener(e -> { 
+			clipBoard.clear();
+			for (Figure f: getView().getSelection()){
+				clipBoard.add(f.clone());
+			}
+
+		});
+		
+		JMenuItem paste = new JMenuItem("Paste");
+		paste.setAccelerator(KeyStroke.getKeyStroke("control V"));
+		editMenu.add(paste);
+		paste.addActionListener(e ->{
+			getView().clearSelection();
+			for (Figure f: clipBoard){
+				f.move(1, 1);
+				getView().addToSelection(f);
+				getModel().addFigure(f);
+			}
+			getView().repaint(); // only shows handles
+		});
+
 
 		editMenu.addSeparator();
 		JMenuItem clear = new JMenuItem("Clear");

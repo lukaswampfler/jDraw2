@@ -114,11 +114,11 @@ public class Line extends AbstractFigure {
 
 
 	@Override
-    public List<Figure.Handle> getHandles() {
+    public List<AbstractFigure.Handle> getHandles() {
 		if (dx * dy < 0){ // positive slope
-			return List.of(Figure.Handle.NE, Figure.Handle.SW);
+			return List.of(AbstractFigure.Handle.NE, AbstractFigure.Handle.SW);
 		} else{
-			return List.of(Figure.Handle.NW, Figure.Handle.SE);
+			return List.of(AbstractFigure.Handle.NW, AbstractFigure.Handle.SE);
 		}
 	}
 
