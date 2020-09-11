@@ -107,7 +107,6 @@ public class StdContext extends AbstractContext {
 			clipBoard.clear();
 			for (Figure f: getView().getSelection()){
 				clipBoard.add(f.clone());
-				System.out.println(clipBoard.size());
 				getModel().removeFigure(f);
 				//getView().removeFromSelection(f); nicht nötig.
 				getView().repaint();
@@ -133,8 +132,9 @@ public class StdContext extends AbstractContext {
 			getView().clearSelection();
 			for (Figure f: clipBoard){
 				f.move(1, 1);
-				getView().addToSelection(f);
-				getModel().addFigure(f);
+				Figure newFigure = f.clone();
+				getView().addToSelection(newFigure);
+				getModel().addFigure(newFigure);
 			}
 			getView().repaint(); // only shows handles
 		});
