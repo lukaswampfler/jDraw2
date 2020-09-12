@@ -8,11 +8,11 @@ package jdraw.figures;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.Polygon;
+import java.awt.Rectangle;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
+import jdraw.framework.AbstractFigure;
 import jdraw.framework.Figure;
 import jdraw.framework.FigureEvent;
 import jdraw.framework.FigureListener;
@@ -23,7 +23,7 @@ import jdraw.framework.FigureListener;
  * @author Christoph Denzler
  *
  */
-public class Triangle extends Polygon implements Figure {
+public class Triangle extends AbstractFigure implements Figure {
 
 	/**
 	 *
@@ -106,7 +106,7 @@ public class Triangle extends Polygon implements Figure {
 	@Override
 	public Figure clone() {
 		return null;
-	}*/
+	}
 	
 	protected void propagateFigureEvent() {
 		FigureEvent fe = new FigureEvent(this);
@@ -114,7 +114,7 @@ public class Triangle extends Polygon implements Figure {
 			listener.figureChanged(fe);
 		}
 	}
-
+*/
 	@Override
     public List<Figure.Handle> getHandles() {
 		return List.of(Figure.Handle.N, Figure.Handle.SW, Figure.Handle.SE);

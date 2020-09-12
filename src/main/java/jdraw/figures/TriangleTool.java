@@ -175,7 +175,7 @@ public class TriangleTool implements DrawTool {
 	
 	@Override
 	public Icon getIcon() {
-		return new ImageIcon(getClass().getResource(IMAGES + "Dreieck.png"));
+		return new ImageIcon(getClass().getResource(IMAGES + "triangle.png"));
 	}
 
 	@Override

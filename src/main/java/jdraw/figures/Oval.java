@@ -5,11 +5,12 @@
 
 package jdraw.figures;
 
-import java.awt.geom.Ellipse2D.Double;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.geom.Ellipse2D;
 
 import jdraw.framework.AbstractFigure;
 
@@ -23,7 +24,7 @@ import jdraw.framework.AbstractFigure;
 public class Oval extends AbstractFigure {
 
 	/** Use the java.awt. in order to save/reuse code. */
-	private Double oval;
+	private Ellipse2D.Double oval;	// XXX ich habe nicht Double importiert sondern nur noch Ellipse2D, damit der Code verständlicher wird, denn bei einem Typ Double denk man ja nciht gerade an eine Ellipse.
 	
 	/** list of listeners. */
 	//private final List<FigureListener> listeners = new CopyOnWriteArrayList<>();
@@ -36,7 +37,7 @@ public class Oval extends AbstractFigure {
 	 * @param h the oval's height
 	 */
 	public Oval(int x, int y, int w, int h) {
-		oval = new Double(x, y, w, h);
+		oval = new Ellipse2D.Double(x, y, w, h);
 		this.rectangle = new Rectangle(x, y, w, h);
 	}
 
@@ -46,6 +47,10 @@ public class Oval extends AbstractFigure {
 	 */
 	@Override
 	public void draw(Graphics g) {
+		// XXX habe ich nicht erklärt, aber effektiv ist der Parameter g vom Typ Graphics2D
+		Graphics2D g2 = (Graphics2D) g;
+		//     und auf g2 kann man draw(shape) und fill(shape) aufrufen, und das oval ist so ein shape.
+		//     => eine Basisklasse AbstractShapeFigure würde sich also anbieten.
 		g.setColor(Color.GREEN);
 		g.fillOval((int)(rectangle.x), (int)(rectangle.y), (int)(rectangle.width), (int)(rectangle.height));
 		g.setColor(Color.BLUE);
@@ -100,9 +105,11 @@ public class Oval extends AbstractFigure {
 	@Override
 	public AbstractFigure clone() {
 		// no try-catch necessary: because Exception-handling already in super-call??
+		// XXX => genau! Bei der Methode clone in der Basisklasse wird das "throws CloneNotSupprtedException" ja nicht
+		//        mehr deklariert. Das ist gemäss Liskov erlaubt! Und aus diesem Grund musst Du hier jetzt kein try-catch mehr machen.
 		Oval f = (Oval) super.clone();
-			f.oval = (Double) this.oval.clone();
-			return f;
+		f.oval = (Ellipse2D.Double) this.oval.clone();
+		return f;
 	}
 
 }

@@ -5,12 +5,10 @@
 package jdraw.std;
 
 import java.io.File;
-import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
@@ -19,9 +17,10 @@ import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import jdraw.figures.RectTool;
-import jdraw.figures.OvalTool;
 import jdraw.figures.LineTool;
+import jdraw.figures.OvalTool;
+import jdraw.figures.RectTool;
+import jdraw.figures.TriangleTool;
 //import jdraw.figures.TriangleTool;
 import jdraw.framework.DrawCommandHandler;
 import jdraw.framework.DrawModel;
@@ -246,8 +245,8 @@ public class StdContext extends AbstractContext {
 		addTool(rectangleTool);
 		OvalTool ovalTool = new OvalTool(this);
 		addTool(ovalTool);
-		//TriangleTool triTool = new TriangleTool(this);
-		//addTool(triTool);
+		TriangleTool triTool = new TriangleTool(this);
+		addTool(triTool);
 		
 	}
 

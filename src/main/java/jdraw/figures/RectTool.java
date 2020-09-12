@@ -47,6 +47,8 @@ public class RectTool implements DrawTool {
 	 * mouse down - mouse drag - mouse up cycle) this variable refers
 	 * to the new rectangle that is inserted.
 	 */
+	// XXX anstelle von AbstractFigure könntest Du hier auch den Typ Figure verwenden.
+	//     Das wäre dann der erste Schritt in Richtung abstrakte Basisklasse.
 	private AbstractFigure newRect = null;
 
 	/**

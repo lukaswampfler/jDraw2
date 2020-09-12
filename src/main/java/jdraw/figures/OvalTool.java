@@ -18,7 +18,7 @@ import jdraw.framework.DrawTool;
 import jdraw.framework.DrawView;
 
 /**
- * This tool defines a mode for drawing rectangles.
+ * This tool defines a mode for drawing ovals.
  *
  * @see jdraw.framework.Figure
  *
@@ -43,21 +43,21 @@ public class OvalTool implements DrawTool {
 	private final DrawView view;
 
 	/**
-	 * Temporary variable. During rectangle creation (during a
+	 * Temporary variable. During oval creation (during a
 	 * mouse down - mouse drag - mouse up cycle) this variable refers
-	 * to the new rectangle that is inserted.
+	 * to the new oval that is inserted.
 	 */
 	private AbstractFigure newOval = null;
 
 	/**
 	 * Temporary variable.
-	 * During rectangle creation this variable refers to the point the
+	 * During oval creation this variable refers to the point the
 	 * mouse was first pressed.
 	 */
 	private Point anchor = null;
 
 	/**
-	 * Create a new rectangle tool for the given context.
+	 * Create a new oval tool for the given context.
 	 * @param context a context to use this tool in.
 	 */
 	public OvalTool(DrawContext context) {
@@ -76,9 +76,7 @@ public class OvalTool implements DrawTool {
 	}
 
 	/**
-	 * Activates the Rectangle Mode. There will be a
-	 * specific menu added to the menu bar that provides settings for
-	 * Rectangle attributes
+	 * Activates the oval Mode.
 	 */
 	@Override
 	public void activate() {
@@ -86,8 +84,8 @@ public class OvalTool implements DrawTool {
 	}
 
 	/**
-	 * Initializes a new Rectangle object by setting an anchor
-	 * point where the mouse was pressed. A new Rectangle is then
+	 * Initializes a new oval object by setting an anchor
+	 * point where the mouse was pressed. A new oval is then
 	 * added to the model.
 	 * @param x x-coordinate of mouse
 	 * @param y y-coordinate of mouse
@@ -106,7 +104,7 @@ public class OvalTool implements DrawTool {
 	}
 
 	/**
-	 * During a mouse drag, the Rectangle will be resized according to the mouse
+	 * During a mouse drag, the oval will be resized according to the mouse
 	 * position. The status bar shows the current size.
 	 * 
 	 * @param x   x-coordinate of mouse
@@ -124,7 +122,7 @@ public class OvalTool implements DrawTool {
 	}
 
 	/**
-	 * When the user releases the mouse, the Rectangle object is updated
+	 * When the user releases the mouse, the oval object is updated
 	 * according to the color and fill status settings.
 	 * 
 	 * @param x   x-coordinate of mouse
