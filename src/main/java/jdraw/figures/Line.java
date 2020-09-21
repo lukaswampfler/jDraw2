@@ -12,7 +12,7 @@ import java.awt.Rectangle;
 import java.util.List;
 import java.awt.geom.Line2D.Double;
 
-import jdraw.framework.AbstractFigure;
+import jdraw.figures.AbstractFigure;
 //import jdraw.framework.Figure;
 
 /**

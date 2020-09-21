@@ -11,7 +11,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import jdraw.framework.AbstractFigure;
+import jdraw.figures.AbstractFigure;
 
 
 /**

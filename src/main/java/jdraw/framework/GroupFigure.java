@@ -7,6 +7,8 @@ import java.awt.Rectangle;
 import java.util.List;
 import java.util.ArrayList;
 
+import jdraw.figures.AbstractFigure;
+
 import java.util.stream.Stream;
 
 

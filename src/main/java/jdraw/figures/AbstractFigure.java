@@ -1,10 +1,13 @@
-package jdraw.framework;
+package jdraw.figures;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.List;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import jdraw.framework.FigureListener;
+import jdraw.framework.Figure;
+import jdraw.framework.FigureEvent;
 
 
 public abstract class AbstractFigure implements Figure {
