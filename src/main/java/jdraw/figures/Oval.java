@@ -5,9 +5,10 @@
 
 package jdraw.figures;
 
-import java.awt.geom.Ellipse2D.Double;
+import java.awt.geom.Ellipse2D;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 
@@ -23,7 +24,7 @@ import jdraw.figures.AbstractFigure;
 public class Oval extends AbstractFigure {
 
 	/** Use the java.awt. in order to save/reuse code. */
-	private Double oval;
+	private Ellipse2D.Double oval;
 	
 	/** list of listeners. */
 	//private final List<FigureListener> listeners = new CopyOnWriteArrayList<>();
@@ -36,7 +37,7 @@ public class Oval extends AbstractFigure {
 	 * @param h the oval's height
 	 */
 	public Oval(int x, int y, int w, int h) {
-		oval = new Double(x, y, w, h);
+		oval = new Ellipse2D.Double(x, y, w, h);
 		this.rectangle = new Rectangle(x, y, w, h);
 	}
 
@@ -46,23 +47,26 @@ public class Oval extends AbstractFigure {
 	 */
 	@Override
 	public void draw(Graphics g) {
-		g.setColor(Color.GREEN);
-		g.fillOval((int)(rectangle.x), (int)(rectangle.y), (int)(rectangle.width), (int)(rectangle.height));
-		g.setColor(Color.BLUE);
-		g.drawOval((int)(rectangle.x), (int)(rectangle.y), (int)(rectangle.width), (int)(rectangle.height));
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setColor(Color.BLUE);
+		g2.draw(oval);
+		g2.setColor(Color.GREEN);
+		g2.fill(oval);
 	}
 	
 	@Override
 	public void setBounds(Point origin, Point corner) {
-		rectangle.setFrameFromDiagonal(origin, corner);
+		super.setBounds(origin, corner);
+		oval.setFrameFromDiagonal(origin, corner);
 		propagateFigureEvent();
 	}
 
-	/*@Override
+	@Override
 	public void move(int dx, int dy) {
 		if (dx != 0 || dy != 0) { // notification only if there is a change
-			rectangle.setLocation(rectangle.x + dx, rectangle.y + dy);
-			propagateFigureEvent();
+			super.move(dx, dy);
+			Rectangle r = this.getRectangle();
+			oval.setFrameFromDiagonal(r.getX()+dx, r.getY()+dy, r.getX()+dx+r.getWidth(), r.getY()+dy+r.getHeight());
 		}
 	}
 
@@ -75,7 +79,7 @@ public class Oval extends AbstractFigure {
 	public Rectangle getBounds() {
 		return rectangle.getBounds();
 	}
-
+/*
 	@Override
 	public void addFigureListener(FigureListener listener) {
 		if (listener != null && !listeners.contains(listener)) {
@@ -99,9 +103,9 @@ public class Oval extends AbstractFigure {
 
 	@Override
 	public AbstractFigure clone() {
-		// no try-catch necessary: because Exception-handling already in super-call??
+		// no try-catch necessary: because Exception-handling already in super-call!
 		Oval f = (Oval) super.clone();
-			f.oval = (Double) this.oval.clone();
+			f.oval = (Ellipse2D.Double) this.oval.clone();
 			return f;
 	}
 

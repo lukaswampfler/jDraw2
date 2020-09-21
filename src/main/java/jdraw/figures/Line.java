@@ -60,8 +60,9 @@ public class Line extends AbstractFigure {
 	
 	@Override
 	public void setBounds(Point origin, Point corner) {
+		super.setBounds(origin, corner);
 		line.setLine(origin, corner);
-		rectangle.setFrameFromDiagonal(origin, corner);
+		//rectangle.setFrameFromDiagonal(origin, corner);
 		propagateFigureEvent();
 	}
 

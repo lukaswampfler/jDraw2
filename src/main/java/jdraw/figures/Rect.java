@@ -45,7 +45,8 @@ public class Rect extends AbstractFigure {
 	
 	@Override
 	public void setBounds(Point origin, Point corner) {
-		rectangle.setFrameFromDiagonal(origin, corner);
+		super.setBounds(origin, corner);
+		//rectangle.setFrameFromDiagonal(origin, corner);
 		propagateFigureEvent();
 	}
 

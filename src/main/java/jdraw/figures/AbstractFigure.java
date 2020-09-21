@@ -16,6 +16,9 @@ public abstract class AbstractFigure implements Figure {
 
     public Rectangle rectangle = null;
 
+
+    public Rectangle getRectangle(){return (Rectangle) rectangle.clone();}
+
     @Override
 	public void addFigureListener(FigureListener listener) {
 		if (listener != null && !listeners.contains(listener)) {
@@ -36,7 +39,11 @@ public abstract class AbstractFigure implements Figure {
 	@Override
     public Rectangle getBounds(){
         return rectangle.getBounds();
-	}
+    }
+    @Override
+    public void setBounds(Point origin, Point corner){
+        rectangle.setFrameFromDiagonal(origin, corner);
+    }
 
     @Override
 	public void move(int dx, int dy) {
@@ -67,11 +74,13 @@ public abstract class AbstractFigure implements Figure {
 		}
 	}
 
+
+
     abstract public void draw(Graphics g);
     //abstract public void move(int dx, int dy);
     //abstract public boolean contains(int x, int y);
     //abstract public Rectangle getBounds();
-    abstract public void setBounds(Point origin, Point corner);
+    
     //abstract protected void propagateFigureEvent();
     
     
